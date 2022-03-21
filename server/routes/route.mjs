@@ -37,4 +37,21 @@ route.delete('/delete/:ids',async(req,res)=>{
         console.log(error)
     }
 })
+route.put("/edit",async(req,res)=>{
+    const {name,session,semester,shift,gender,roll,id} = req.body
+    try {
+        await stuSchema.findByIdAndUpdate(id,{
+            $set:{
+                studentName:name,
+                session:session,
+                semester:semester,
+                gender:gender,
+                shift:shift,
+                roll:roll
+            }
+        })
+    } catch (error) {
+       console.log(error) 
+    }
+})
 export default route;

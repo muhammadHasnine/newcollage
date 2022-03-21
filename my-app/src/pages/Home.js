@@ -63,7 +63,7 @@ const Home = () => {
                     <ul>
                         {link_ary.map((c)=>(
                             <Link to={`/studetail/${c}`}>
-                                <li>{c}</li>
+                                <li className='bg-[#f1f1f1] mb-1 text-center hover:bg-slate-500'>{c}</li>
                             </Link>
                         ))}
                         {/* <li>Civil</li>

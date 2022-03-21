@@ -59,9 +59,11 @@ const StuRegistation = () => {
   const gpaHandler = (i) => {
     if (i === "8th Semester") {
       setClick(true);
+      setsemester(i)
     }
     if (i !== "8th Semester") {
       setClick(false);
+      setsemester(i)
     }
 
     console.log("index", i);
