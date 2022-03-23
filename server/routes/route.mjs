@@ -3,7 +3,7 @@ import stuSchema from '../models/studentSchema.mjs'
 const route = express.Router();
 
 route.post("/postRegist",async(req,res)=>{
-    const {stuname,session,semester,techno,gender,shift,roll,point} = req.body
+    const {stuname,session,semester,techno,gender,shift,roll,point,imgurl} = req.body
     const stdata = new stuSchema({
         studentName:stuname,
         roll:roll,
@@ -12,7 +12,8 @@ route.post("/postRegist",async(req,res)=>{
         semester:semester,
         technology:techno,
         gender:gender,
-        shift:shift
+        shift:shift,
+        imgurl:imgurl
     })
     try {
         await stdata.save()
@@ -38,7 +39,7 @@ route.delete('/delete/:ids',async(req,res)=>{
     }
 })
 route.put("/edit",async(req,res)=>{
-    const {name,session,semester,shift,gender,roll,id} = req.body
+    const {name,session,semester,shift,gender,roll,id,imgurl} = req.body
     try {
         await stuSchema.findByIdAndUpdate(id,{
             $set:{
@@ -47,7 +48,8 @@ route.put("/edit",async(req,res)=>{
                 semester:semester,
                 gender:gender,
                 shift:shift,
-                roll:roll
+                roll:roll,
+                imgurl:imgurl
             }
         })
     } catch (error) {

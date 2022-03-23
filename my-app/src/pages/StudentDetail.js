@@ -5,21 +5,21 @@ import CategNav from '../components/CategoryNav'
 import { useSearch } from '../huck/useSearch'
 
 const Studentdetails = () => {
-    const thd = ["Student Name","Roll","Semester","Shift","Session","Gender","Result","Edit","Delete"]
+    const thd = ["Student Name","Roll","Semester","Shift","Session","Gender","Delete"]
     const {tech} = useParams()
     console.log(tech)
     const [studata, setstudata] = useState([])
     const [search, setsearch] = useState(null)
-    const num = [1,2];
+    const num = [1,3];
     console.log("alldatas",studata)
     const [stufilt, setstufilt] = useState([])
+    const [shift, setshift] = useState([])
     const [all, setall] = useState([])
   
     useEffect(()=>{
         axios.get('http://localhost:3002/api/read').then((resposn)=>{
                     setstudata(resposn.data) 
-                   
-                  
+           
         })
     },[])
 
@@ -39,7 +39,8 @@ const Studentdetails = () => {
       
         else if(match === '1st Semester' || '2nd Semester' || '3rd Semester' || '4th Semester' || '5th Semester' || '6th Semester' || '7th Semester' || '8th Semester'){
             const newarray = stufilt.filter((nar)=>nar.semester===match)
-            return setall(newarray)
+             setall(newarray)
+             setshift(newarray)
         }
         // else{
         //     return setall(stufilt)
@@ -51,8 +52,8 @@ const Studentdetails = () => {
         //     return setall(stufilt);
         //   }
           if(efil === '1st' || '2nd'){
-            const newarray = stufilt.filter((re)=>re.shift===efil)
-            return setall(newarray)
+            const newmatch = shift.filter((re)=>re.shift===efil)
+            return setall(newmatch)
         }
       }
     const deletedata =(idd)=>{
@@ -65,11 +66,11 @@ const Studentdetails = () => {
     <CategNav  handarti = {handelarticale} hand2 ={handelcat}/>
       <div className="container border-[1px] border-[#6db700] bg-gradient-to-t from-[#ededed] to-[#fefefe] rounded-[5px] max-w-[100%] md:max-w-[80%] m-[30px_0px] md:m-[30px_auto] p-[15px]">
             <div className="title flex justify-around bg-[#6db700] p-[10px] rounded-[5px_5px_0px_0px] text-center text-[white]">
-                <p className=''> {tech}  বিভাগের ছাত্র-ছাত্রী</p>
+                <p className=''><span className='font-semibold'>{tech.toUpperCase()}</span>  বিভাগের ছাত্র-ছাত্রী</p>
                 <input
-            type="text"
+            type="search"
             placeholder="Enter name to be searched"
-            className="searchbar p-[3px] rounded-full  text-[red]"
+            className="searchbar p-1 rounded-[10px] w-[30%] outline-none  text-[#2c2c2c]"
             onChange={(e) =>setsearch(e.target.value)}
           />
             </div>
@@ -86,25 +87,27 @@ const Studentdetails = () => {
                             {useSearch(all,search,num).map((s)=>{
                                 return <>
                                  <tr className=' mb-[20px] odd:bg-gradient-to-tr from-[#b4ee8e] to-[#f5f3f3]'>
-                                <td data-label="Student Name " className=' text-[14px] tracking-[0.35px] font-normal text-[#2a2b2e] p-2 text-center '>{s.studentName}</td>
+                               
+                                <td data-label="Student Name " className='cursor-pointer text-[14px] tracking-[0.35px] font-normal text-[#2a2b2e] p-2 text-center '> <Link to={`/detailstudent/${s._id}`}>{s.studentName}</Link></td>
                                 <td data-label="Roll " className=' text-[14px] tracking-[0.35px] font-normal text-[#2a2b2e] p-2 text-center '>{s.roll}</td>
                                 <td data-label="Semester" className=' text-[14px] tracking-[0.35px] font-normal text-[#2a2b2e] p-2 text-center'>{s.semester}</td>
                                 <td data-label="Shift" className=' text-[14px] tracking-[0.35px] font-normal text-[#2a2b2e] p-2 text-center'>{s.shift}</td>
                                 <td data-label="Session" className=' text-[14px] tracking-[0.35px] font-normal text-[#2a2b2e] p-2 text-center'>{s.session}</td>
                                 <td data-label="Gender" className=' text-[14px] tracking-[0.35px] font-normal text-[#2a2b2e] p-2 text-center'>{s.gender}</td>
-                                <td data-label="Point" className=' flex justify-around text-[14px] tracking-[0.35px] font-normal text-[#2a2b2e] p-2 text-center'> 
+                                {/* <td data-label="Point" className=' flex justify-around text-[14px] tracking-[0.35px] font-normal text-[#2a2b2e] p-2 text-center'> 
                                  {/* {s.gpa.map((d)=>{
                                     return <p>{d}</p>
                                     })} */}
-                                <p>GPA:{s.gpa[0]}</p>
-                                {s.gpa[1]===null ? null: <p>CGPA:{s.gpa[1]}</p>}</td>
+                                {/* <p>GPA:{s.gpa[0]}</p>
+                                // {s.gpa[1]===null ? null: <p>CGPA:{s.gpa[1]}</p>}</td> */}
                                 {/* <td data-label="CGPA" className=' text-[14px] tracking-[0.35px] font-normal text-[#2a2b2e] p-2 text-center'>3.50</td> */}
                                
-                               <td data-label="Edit" className=' text-[14px] tracking-[0.35px] font-normal text-[#2a2b2e] p-2 text-center cursor-pointer'> <Link to={`/editstudata/${s._id}`}>&#9998;</Link></td>
-                             
+                               {/* <td data-label="Edit" className=' text-[14px] tracking-[0.35px] font-normal text-[#2a2b2e] p-2 text-center cursor-pointer'> <Link to={`/editstudata/${s._id}`}>&#9998;</Link></td> */}
+                              
                                 
                              
                                 <td data-label="Delete" className=' text-[14px] tracking-[0.35px] font-normal text-[#2a2b2e] p-2 text-center cursor-pointer ' onClick={()=>deletedata(s._id)}>&#x2717;</td>
+                               
                                 </tr>
                                 </>
                             })}

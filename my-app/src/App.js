@@ -5,7 +5,8 @@ import Home from './pages/Home';
 import StudentDetail from './pages/StudentDetail';
 import Login from './components/Login';
 import EditStudentData from './pages/EditStudentData';
-import Test from './pages/Test'
+import DetailofStudent from './pages/DetailofStudent';
+
 
 const App = () => {
   // const authh = false;
@@ -42,7 +43,7 @@ const App = () => {
           <button className='bg-[#0eb7fa] h-8 focus:ring focus:ring-violet-300 text-white ' onClick={loginfun}>Login</button> </div>
       </div>} /> */}
       <Route path='/studetail/:tech' element={<StudentDetail />}/>
-
+      <Route path='/detailstudent/:id' element={<DetailofStudent/>} />
       <Route path='/editstudata/:id' element={<EditStudentData/>}/>
     </Routes>
 

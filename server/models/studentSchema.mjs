@@ -5,8 +5,16 @@ const stuSchema = new mongoose.Schema({
         type:String,
         require:true
     },
+    imgurl:{
+        type:String,
+        require:true
+    },
     session:{
         type:String,
+        require:true
+    },
+    roll:{
+        type:Number,
         require:true
     },
     semester:{
@@ -23,10 +31,6 @@ const stuSchema = new mongoose.Schema({
     },
     shift:{
         type:String,
-        require:true
-    },
-    roll:{
-        type:Number,
         require:true
     },
     gpa:{

@@ -3,6 +3,7 @@ import axios from "axios";
 const StuRegistation = () => {
   const [stuname, setstuname] = useState("");
   const [roll, setroll] = useState('');
+  const [imgurl, setimgurl] = useState('');
   const [session, setsession] = useState("");
   const [semester, setsemester] = useState("1st Semester");
   const [techno, settechno] = useState("Civil");
@@ -44,6 +45,7 @@ const StuRegistation = () => {
       techno,
       gender,
       shift,
+      imgurl,
       point:[
         gpa,
         cgpa
@@ -71,106 +73,118 @@ const StuRegistation = () => {
   return (
     <>
       <div className="container border-[1px] border-[#6db700] bg-gradient-to-t from-[#ededed] to-[#fefefe] rounded-[5px] max-w-[90%] md:max-w-[80%] m-[30px_auto]">
-        <div className="regcontain p-[20px] ]">
-          <div className="title bg-[#6db700] p-[10px] rounded-[5px_5px_0px_0px] text-center text-[white]">
-            <p>শিক্ষার্থীর তথ্য সংগ্রহ ফরম</p>
-          </div>
-          <div className="from">
-            <div className="stuname p-[10px_0px]">
-              <p className="mb-[5px] font-semibold text-[#333]">Student Name</p>
-              <input
-                className="border-[1px] border-[#d3d1d1] w-[60%] p-[5px]"
-                type="text"
-                onChange={(e) => setstuname(e.target.value)}
-              />
-            </div>
-            <div className="sturoll p-[10px_0px]">
-              <p className="mb-[5px] font-semibold text-[#333]">Roll</p>
-              <input
-                className="border-[1px] border-[#d3d1d1] w-[60%] p-[5px]"
-                type="number"
-                onChange={(e) => setroll(e.target.value)}
-              />
-            </div>
-            <div className="stusession p-[8px_0px]">
-              <p className="mb-[5px] font-semibold text-[#333]">Session</p>
-              <input
-                className="border-[1px] border-[#d3d1d1] w-[60%] p-[5px]"
-                type="text"
-                onChange={(e) => setsession(e.target.value)}
-              />
-            </div>
-            <div className="stusemester p-[8px_0px]">
-              <p className="mb-[5px] font-semibold text-[#333]">Semester</p>
-              <select
-                className="border-[1px] border-[#d3d1d1] w-[60%] p-[5px] "
-                onChange={(e) => gpaHandler(e.target.value)}
-              >
-                {ssemester.map((s, index) => {
-                  return <option>{s}</option>;
-                })}
-              </select>
-            </div>
-            <div className="stutech p-[8px_0px]">
-              <p className="mb-[5px] font-semibold text-[#333]">Technology</p>
-              <select
-                className="border-[1px] border-[#d3d1d1] w-[60%] p-[5px] "
-                onClick={(e) => settechno(e.target.value)}
-              >
-                {technology.map((a) => {
-                  return <option>{a}</option>;
-                })}
-              </select>
-            </div>
-
-            <div className="stugend p-[8px_0px]">
-              <p className="mb-[5px] font-semibold text-[#333]">Gender</p>
-              <select
-                className="border-[1px] border-[#d3d1d1] w-[60%] p-[5px] "
-                onClick={(e) => setgender(e.target.value)}
-              >
-                {sgender.map((x) => {
-                  return <option>{x}</option>;
-                })}
-              </select>
-            </div>
-            <div className="stushift p-[8px_0px]">
-              <p className="mb-[5px] font-semibold text-[#333]">Shift</p>
-              <select
-                className="border-[1px] border-[#d3d1d1] w-[60%] p-[5px] "
-                onClick={(e) => setshift(e.target.value)}
-              >
-                {sshift.map((c) => {
-                  return <option>{c}</option>;
-                })}
-              </select>
-
-              <div className="gpa p-[10px_0px]">
-                <p className="mb-[5px] font-semibold text-[#333]">gpa</p>
-                <input
-                  className="border-[1px] border-[#d3d1d1] w-[60%] p-[5px]"
-                  type="number"
-                  onChange={(e) => setgpa(e.target.value)}
-                />
+          <div className="regcontain p-[20px]">
+              <div className="title bg-[#6db700] p-[10px] rounded-[5px_5px_0px_0px] text-center text-[white]">
+                  <p>শিক্ষার্থীর তথ্য সংগ্রহ ফরম</p>
               </div>
-              <div className={click ? "block" : "gpa hidden p-[10px_0px]"}>
-                <p className="mb-[5px] font-semibold text-[#333]">cgpa</p>
-                <input
-                  className="border-[1px] border-[#d3d1d1] w-[60%] p-[5px]"
-                  type="number"
-                  onChange={(e) => setcgpa(e.target.value)}
-                />
+              <div className="from grid grid-cols-1 md:grid-cols-3">
+                <div className="inputform col-span-2">
+                  <div className="stuname p-[10px_0px]">
+                        <p className="mb-[5px] font-semibold text-[#333]">Student Name</p>
+                        <input
+                          className="border-[1px] border-[#d3d1d1] w-full p-[5px]"
+                          type="text"
+                          onChange={(e) => setstuname(e.target.value)}
+                        />
+                    </div>
+                    <div className="sturoll p-[10px_0px]">
+                        <p className="mb-[5px] font-semibold text-[#333]">Roll</p>
+                        <input
+                          className="border-[1px] border-[#d3d1d1] w-full p-[5px]"
+                          type="number"
+                          onChange={(e) => setroll(e.target.value)}
+                        />
+                    </div>
+                    <div className="stusession p-[8px_0px]">
+                        <p className="mb-[5px] font-semibold text-[#333]">Session</p>
+                        <input
+                          className="border-[1px] border-[#d3d1d1] w-full p-[5px]"
+                          type="text"
+                          onChange={(e) => setsession(e.target.value)}
+                        />
+                    </div>
+                    <div className="stusemester p-[8px_0px]">
+                        <p className="mb-[5px] font-semibold text-[#333]">Semester</p>
+                        <select
+                          className="border-[1px] border-[#d3d1d1] w-full p-[5px] "
+                          onChange={(e) => gpaHandler(e.target.value)}
+                        >
+                          {ssemester.map((s, index) => {
+                            return <option>{s}</option>;
+                          })}
+                        </select>
+                    </div>
+                    <div className="stutech p-[8px_0px]">
+                        <p className="mb-[5px] font-semibold text-[#333]">Technology</p>
+                        <select
+                          className="border-[1px] border-[#d3d1d1] w-full p-[5px] "
+                          onClick={(e) => settechno(e.target.value)}
+                        >
+                          {technology.map((a) => {
+                            return <option>{a}</option>;
+                          })}
+                        </select>
+                    </div>
+                    <div className="stugend p-[8px_0px]">
+                        <p className="mb-[5px] font-semibold text-[#333]">Gender</p>
+                        <select
+                          className="border-[1px] border-[#d3d1d1] w-full p-[5px] "
+                          onClick={(e) => setgender(e.target.value)}
+                        >
+                          {sgender.map((x) => {
+                            return <option>{x}</option>;
+                          })}
+                        </select>
+                    </div>
+                    <div className="stushift p-[8px_0px]">
+                        <p className="mb-[5px] font-semibold text-[#333]">Shift</p>
+                        <select
+                          className="border-[1px] border-[#d3d1d1] w-full p-[5px] "
+                          onClick={(e) => setshift(e.target.value)}
+                        >
+                          {sshift.map((c) => {
+                            return <option>{c}</option>;
+                          })}
+                        </select>
+                      </div>
+                      <div className="gpa p-[10px_0px]">
+                          <p className="mb-[5px] font-semibold text-[#333]">GPA</p>
+                          <input
+                            className="border-[1px] border-[#d3d1d1] w-full p-[5px]"
+                            type="number"
+                            onChange={(e) => setgpa(e.target.value)}
+                          />
+                      </div>
+                      <div className={click ? "block" : "gpa hidden p-[10px_0px]"}>
+                          <p className="mb-[5px] font-semibold text-[#333]">CGPA</p>
+                          <input
+                            className="border-[1px] border-[#d3d1d1] w-full p-[5px]"
+                            type="number"
+                            onChange={(e) => setcgpa(e.target.value)}
+                          />
+                      </div>                
+                  </div>
+                  <div className="imgfild md:ml-4">
+                      <div className="sturoll p-[10px_0px]">
+                            <p className="mb-[5px] font-semibold text-[#333]">Photo Url</p>
+                            <input
+                              className="border-[1px] border-[#d3d1d1] w-full p-[5px]"
+                              type="text"
+                              onChange={(e) => setimgurl(e.target.value)}
+                            />
+                      </div>
+                      <img src={imgurl} />
+                  </div>
+                  
               </div>
-            </div>
-            <button
-              className="p-[10px_15px] border-[1px] border-[#cfcccc] m-[10px_0px] font-semibold text-[#333]"
-              onClick={submit}
-            >
-              Submit
-            </button>
-          </div>
-        </div>
-      </div>
+              <button
+                          className="p-[10px_15px] border-[1px] border-[#cfcccc] m-[10px_0px] font-semibold text-[#333]"
+                          onClick={submit}
+                        >
+                          Submit
+                        </button>
+           </div>
+         </div>
     </>
   );
 };
