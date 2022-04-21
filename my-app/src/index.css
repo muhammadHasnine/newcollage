@@ -3,13 +3,16 @@
 @tailwind utilities;
 
 
+body{
+    background: rgb(86, 9, 228);
+}
+
 .right_menu:hover .drop_down{
     display: block;
 }
 /* .table{
     border-collapse: collapse;
 } */
-
 
 @media (max-width: 768px){
     .table thead{

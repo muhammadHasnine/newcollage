@@ -6,7 +6,9 @@ import StudentDetail from './pages/StudentDetail';
 import Login from './components/Login';
 import EditStudentData from './pages/EditStudentData';
 import DetailofStudent from './pages/DetailofStudent';
-
+import Navbar from './components/Navbar';
+import TestProject from './components/TestProject';
+import Navbartest from './components/Navbartest'
 
 const App = () => {
   // const authh = false;
@@ -32,17 +34,20 @@ const App = () => {
 
 
     <Routes>
+      <Route path='/testnav' element={<Navbartest/>}/>
+      <Route path='/testp' element={<TestProject/>}/>
       <Route path='/' element={<Home />} />
+      <Route path='/navbar' element={<Navbar/>}/>
       <Route path='/stregis' element={<StuRegistation />} />
       {/* <Route path='/studetail/:tech' element={<StudentDetail/>} /> */}
       {/* <Route path='/login' element={<Login />} /> */}
-      {/* <Route path='/studetail/:tech' element={auth ? <StudentDetail /> : <div className='flex justify-center mt-20 '>
+      <Route path='/studetail/:tech' element={auth ? <StudentDetail /> : <div className='flex justify-center mt-20 '>
         <div className="  flex text-center flex-col loginform w-[300px] p-[20px]  bg-[#e9e9e9] rounded-3xl">
           <input  className='h-[50px] mb-5  focus:outline-none focus:ring focus:ring-violet-300' type="text" placeholder='user' onChange={(e) => setti(e.target.value)} />
           <input type="password" className='h-[50px] mb-5 focus:outline-none focus:ring focus:ring-violet-300'  placeholder='password' onChange={(e) => setimrul(e.target.value)} />
           <button className='bg-[#0eb7fa] h-8 focus:ring focus:ring-violet-300 text-white ' onClick={loginfun}>Login</button> </div>
-      </div>} /> */}
-      <Route path='/studetail/:tech' element={<StudentDetail />}/>
+      </div>} />
+      {/* <Route path='/studetail/:tech' element={<StudentDetail />}/> */}
       <Route path='/detailstudent/:id' element={<DetailofStudent/>} />
       <Route path='/editstudata/:id' element={<EditStudentData/>}/>
     </Routes>
